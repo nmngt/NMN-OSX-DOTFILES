@@ -1,0 +1,77 @@
+# ----------------------------------------------------------------------------
+#  ~/.inputrc
+#  $Id$
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+#  ::: AUTO-COMPLETION :::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# List all matches in case multiple possible completions are possible
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# Show all autocomplete results at once
+set page-completions off
+
+# If there are more than 200 possible completions for a word, ask to show them all
+set completion-query-items 200
+
+# Show extra file information when completing, like `ls -F` does
+# set visible-stats on
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# switch to "german" keyboard behaviour
+set meta-flag on
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+#[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
+
+# If possible, add tab completion for many more commands
+#[ -f /etc/bash_completion ] && source /etc/bash_completion
+
+# ---------------------------------------------------------------------------
+#  ::: INPUT MAPPING :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+
+# this makes the "delete" key work rather than just entering a ~
+"\e[3~": delete-char
+
+# use ctrl+left/right arrow keys to jump the cursor over words
+"\e[5C": forward-word
+"\e[5D": backward-word
+
+# start typing a command and use the up/down arrow to autocomplete 
+# from commands in your history
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+
+# I'm not sure what keys these are!
+#"\e[1~": beginning-of-line
+#"\e[4~": end-of-line
+#"\e[5~": beginning-of-history
+#"\e[6~": end-of-history
+#"\e[2~": quoted-insert

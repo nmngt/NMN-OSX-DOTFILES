@@ -1,0 +1,75 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>~/.vim/colors/_norman.vim.html</title>
+<meta name="Generator" content="Norman Georg">
+</head>
+<body bgcolor="#333333" text="#ffffff">
+
+  <pre><font color="#87ceeb">" Vim color file</font>
+<font color="#87ceeb">"</font> <font color="#cd5c5c">Maintainer:</font><font color="#87ceeb">   Norman Georg &lt;norm@ngeorg.com&gt;</font>
+<font color="#87ceeb">"</font> <font color="#cd5c5c">Last Change:</font><font color="#87ceeb">  10 Oct 2006</font>
+<font color="#87ceeb">"</font> <font color="#cd5c5c">URL:</font><font color="#87ceeb">          http://ngeorg.com </font>
+
+<font color="#87ceeb">" cool help screens</font>
+<font color="#87ceeb">" :he group-name</font>
+<font color="#87ceeb">" :he highlight-groups</font>
+<font color="#87ceeb">" :he cterm-colors</font>
+
+<font color="#f0e68c"><b>set</b></font> <font color="#cd5c5c">background</font>=dark
+<font color="#f0e68c"><b>hi</b></font> clear
+<font color="#f0e68c"><b>if</b></font> <font color="#98fb98">exists</font>(<font color="#ffa0a0">"syntax_on"</font>)
+    <font color="#f0e68c"><b>syntax</b></font> reset
+<font color="#f0e68c"><b>endif</b></font>
+<font color="#f0e68c"><b>let</b></font> g:colors_name<font color="#f0e68c"><b>=</b></font><font color="#ffa0a0">"_norman"</font>
+
+<font color="#f0e68c"><b>hi</b></font> Normal   <font color="#bdb76b"><b>guifg</b></font>=White <font color="#bdb76b"><b>guibg</b></font>=grey20
+
+<font color="#87ceeb">" highlight groups</font>
+<font color="#f0e68c"><b>hi</b></font> Cursor   <font color="#bdb76b"><b>guibg</b></font>=khaki <font color="#bdb76b"><b>guifg</b></font>=slategrey
+<font color="#87ceeb">"hi CursorIM    </font>
+<font color="#87ceeb">"hi Directory   </font>
+<font color="#87ceeb">"hi DiffAdd     </font>
+<font color="#87ceeb">"hi DiffChange  </font>
+<font color="#87ceeb">"hi DiffDelete  </font>
+<font color="#87ceeb">"hi DiffText    </font>
+<font color="#87ceeb">"hi ErrorMsg    </font>
+<font color="#f0e68c"><b>hi</b></font> VertSplit    <font color="#bdb76b"><b>guibg</b></font>=<font color="#ffa0a0">#c2bfa5</font> <font color="#bdb76b"><b>guifg</b></font>=grey50 <font color="#bdb76b"><b>gui</b></font>=<font color="#cd5c5c">none</font>
+<font color="#f0e68c"><b>hi</b></font> Folded       <font color="#bdb76b"><b>guibg</b></font>=grey30 <font color="#bdb76b"><b>guifg</b></font>=gold
+<font color="#f0e68c"><b>hi</b></font> FoldColumn   <font color="#bdb76b"><b>guibg</b></font>=grey30 <font color="#bdb76b"><b>guifg</b></font>=tan
+<font color="#f0e68c"><b>hi</b></font> IncSearch    <font color="#bdb76b"><b>cterm</b></font>=<font color="#cd5c5c">none</font> <font color="#bdb76b"><b>ctermbg</b></font>=blue <font color="#bdb76b"><b>ctermfg</b></font>=grey <font color="#bdb76b"><b>guifg</b></font>=slategrey <font color="#bdb76b"><b>guibg</b></font>=khaki
+<font color="#87ceeb">"hi LineNr      </font>
+<font color="#f0e68c"><b>hi</b></font> ModeMsg      <font color="#bdb76b"><b>guifg</b></font>=goldenrod
+<font color="#f0e68c"><b>hi</b></font> MoreMsg      <font color="#bdb76b"><b>ctermfg</b></font>=LightGreen <font color="#bdb76b"><b>guifg</b></font>=SeaGreen
+<font color="#f0e68c"><b>hi</b></font> NonText      <font color="#bdb76b"><b>ctermfg</b></font>=LightBlue <font color="#bdb76b"><b>guifg</b></font>=LightBlue <font color="#bdb76b"><b>guibg</b></font>=grey30
+<font color="#f0e68c"><b>hi</b></font> Question     <font color="#bdb76b"><b>guifg</b></font>=springgreen
+<font color="#f0e68c"><b>hi</b></font> Search   <font color="#bdb76b"><b>ctermbg</b></font>=blue <font color="#bdb76b"><b>ctermfg</b></font>=grey <font color="#bdb76b"><b>guibg</b></font>=peru <font color="#bdb76b"><b>guifg</b></font>=wheat
+<font color="#f0e68c"><b>hi</b></font> SpecialKey   <font color="#bdb76b"><b>guifg</b></font>=yellowgreen
+<font color="#f0e68c"><b>hi</b></font> StatusLine   <font color="#bdb76b"><b>guibg</b></font>=<font color="#ffa0a0">#c2bfa5</font> <font color="#bdb76b"><b>guifg</b></font>=black <font color="#bdb76b"><b>gui</b></font>=<font color="#cd5c5c">none</font>
+<font color="#f0e68c"><b>hi</b></font> StatusLineNC <font color="#bdb76b"><b>guibg</b></font>=<font color="#ffa0a0">#c2bfa5</font> <font color="#bdb76b"><b>guifg</b></font>=grey50 <font color="#bdb76b"><b>gui</b></font>=<font color="#cd5c5c">none</font>
+<font color="#f0e68c"><b>hi</b></font> Title    <font color="#bdb76b"><b>guifg</b></font>=indianred
+<font color="#f0e68c"><b>hi</b></font> Visual   <font color="#bdb76b"><b>cterm</b></font>=<font color="#cd5c5c">none</font> <font color="#bdb76b"><b>ctermbg</b></font>=darkgreen <font color="#bdb76b"><b>ctermfg</b></font>=yellow <font color="#bdb76b"><b>gui</b></font>=<font color="#cd5c5c">none</font> <font color="#bdb76b"><b>guifg</b></font>=khaki <font color="#bdb76b"><b>guibg</b></font>=olivedrab
+<font color="#87ceeb">"hi VisualNOS   </font>
+<font color="#f0e68c"><b>hi</b></font> WarningMsg   <font color="#bdb76b"><b>guifg</b></font>=salmon
+<font color="#87ceeb">"hi WildMenu    </font>
+<font color="#87ceeb">"hi Menu        </font>
+<font color="#87ceeb">"hi Scrollbar   </font>
+<font color="#87ceeb">"hi Tooltip     </font>
+
+<font color="#87ceeb">" syntax highlighting groups</font>
+<font color="#f0e68c"><b>hi</b></font> Comment  <font color="#bdb76b"><b>ctermfg</b></font>=lightblue <font color="#bdb76b"><b>guifg</b></font>=SkyBlue
+<font color="#f0e68c"><b>hi</b></font> Constant     <font color="#bdb76b"><b>ctermfg</b></font>=darkcyan <font color="#bdb76b"><b>guifg</b></font>=<font color="#ffa0a0">#ffa0a0</font>
+<font color="#f0e68c"><b>hi</b></font> Identifier   <font color="#bdb76b"><b>ctermfg</b></font>=darkgreen <font color="#bdb76b"><b>cterm</b></font>=<font color="#cd5c5c">none</font> <font color="#bdb76b"><b>guifg</b></font>=palegreen
+<font color="#f0e68c"><b>hi</b></font> Statement    <font color="#bdb76b"><b>ctermfg</b></font>=brown <font color="#bdb76b"><b>guifg</b></font>=khaki
+<font color="#f0e68c"><b>hi</b></font> PreProc  <font color="#bdb76b"><b>ctermfg</b></font>=darkmagenta <font color="#bdb76b"><b>guifg</b></font>=indianred
+<font color="#f0e68c"><b>hi</b></font> Type     <font color="#bdb76b"><b>ctermfg</b></font>=darkgreen <font color="#bdb76b"><b>guifg</b></font>=darkkhaki
+<font color="#f0e68c"><b>hi</b></font> Special  <font color="#bdb76b"><b>ctermfg</b></font>=darkmagenta <font color="#bdb76b"><b>guifg</b></font>=navajowhite
+<font color="#87ceeb">"hi Underlined  </font>
+<font color="#f0e68c"><b>hi</b></font> Ignore   <font color="#bdb76b"><b>guifg</b></font>=grey40
+<font color="#87ceeb">"hi Error       </font>
+<font color="#f0e68c"><b>hi</b></font> Todo     <font color="#bdb76b"><b>ctermfg</b></font>=darkred <font color="#bdb76b"><b>ctermbg</b></font>=yellow <font color="#bdb76b"><b>guifg</b></font>=orangered <font color="#bdb76b"><b>guibg</b></font>=yellow2
+
+
+<font color="#87ceeb">"vim: ts=4</font>
+</pre>
+</body></html>

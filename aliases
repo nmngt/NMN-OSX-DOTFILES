@@ -1,0 +1,19 @@
+# ----------------------------------------------------------------------------
+#  BASH: Aliases
+#  $Id$
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+nbe_msg "Setup BASH aliases" ${BASH_SOURCE}
+
+# load all aliases from ./bash.d/aliases/
+if [ -d "${NBE_PATH}/bash.d/aliases" ]; 
+then
+    for file in ${NBE_PATH}/bash.d/aliases/*; 
+    do
+        if [ -r "$file" ]; 
+        then
+            source $file
+        fi
+    done
+fi

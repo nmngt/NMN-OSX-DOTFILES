@@ -1,0 +1,138 @@
+# ----------------------------------------------------------------------------
+#  BASH: Functions
+#  $Id$
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+[[ "${NBE_VERBOSE}" = 1 ]] && echo -e "# Loading core functions (${cyan}$BASH_SOURCE${trans})"
+
+
+# ----------------------------------------------------------------------------
+#  ::: CORE FUNCTIONS :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+
+#
+# e()
+#
+# print line with newline char (\n)
+#
+function e
+{
+    echo "$@"
+}
+
+#
+# ee()
+#
+# print line withOUT newline char (\n)
+#
+function ee
+{
+    [ $IS_MAC ] && echo -n "$@" || echo -e "$@"
+}
+
+#
+# nbe_error()
+#
+# $1 Message
+# $2 Realm
+#
+function nbe_error()
+{
+    echo "${color_error}[${2:=Undefined}]${trans} ${1}" >&2
+    echo "$(date "+%Y%m%d %H:%M:%S") [${2:=Undefined}]: ${1}" >> $NBE_LOGFILE
+#     date > /dev/stderr
+#     hostname > /dev/stderr
+#     echo "$@" > /dev/stderr
+#     logger "$@"
+}
+
+#
+# nbe_usage() - print line with 'usage' hint
+#
+# args:
+#   $1 = (str) script name or function name (= )
+#   $2 = (str) arguments
+#   $3 = (int) exit code (= $E_BADARGS)
+#
+# usage:    
+#   nbe_usage [function/script] [args] [exit-code]
+#   nbe_usage ${FUNCNAME} "arg1" $E_BADARGS
+#
+function nbe_usage()
+{
+    if [[ $# -eq 0 ]]; then
+        echo "usage: nbe_usage [function/script] [args] [exit-code]"
+        exit $E_NO_ARGS
+    fi
+
+    local caller=${1="Unknown Function/File"}
+
+    # show usage hints with filename (or $FUNCNAME), arguments and exit code
+    [ -f "$caller" ] && echo "usage: $(basename $BASH_SOURCE) $2" || echo "usage: $caller $2"
+
+    # exit with given code.. else $E_BADARGS
+    [ "$3" == "" ] && exit $E_BADARGS || exit $3
+}
+
+
+# #!/bin/bash
+# # usage-message.sh
+
+# : ${1?"Usage: $0 ARGUMENT"}
+# #  Script exits here if command-line parameter absent,
+# #+ with following error message.
+# #    usage-message.sh: 1: Usage: usage-message.sh ARGUMENT
+
+# echo "These two lines echo only if command-line parameter given."
+# echo "command-line parameter = \"$1\""
+
+# exit 0  # Will exit here only if command-line parameter present.
+
+# # Check the exit status, both with and without command-line parameter.
+# # If command-line parameter present, then "$?" is 0.
+# # If not, then "$?" is 1.
+
+
+#
+# nbe_msg() - print debug msg to stdout
+#
+#  $1 = (str) message
+#. $2 = (str) caller info
+#
+# usage: 
+#   nbe_msg [text] [$BASH_SOURCE]
+#
+function nbe_msg()
+{
+    [ $# -eq 0 ] && nbe_usage ${FUNCNAME} "'arguments' '[\$BASH_SOURCE]'" ${E_NO_ARGS}
+
+    [ "${NBE_VERBOSE}" = 1 ] && echo -e "# ${1} (${cyan}${2:="unknown"}${trans})"
+}
+
+#
+# nbe_hr() - print horizontal line
+#
+function nbe_hr()
+{
+    echo "${white}----------------------------------------------------------------------${trans}"
+}
+
+
+# ----------------------------------------------------------------------------
+#  ::: LOAD FUNCTIONS :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+
+
+
+nbe_msg "Loading custom functions" ${BASH_SOURCE}
+if [ -d "${NBE_PATH}/bash.d/functions" ]; 
+then
+    for file in ${NBE_PATH}/bash.d/functions/*; 
+    do
+        if [ -r "$file" ]; 
+        then
+            source $file
+        fi
+    done
+fi

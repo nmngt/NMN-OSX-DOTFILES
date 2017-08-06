@@ -1,0 +1,141 @@
+#
+# Global .gitignore Configuration File
+#
+# You have to add this file to your git config.
+#
+#
+# Usage:
+#   $ git config --global core.excludesfile ~/.gitignore
+#
+#
+# The rules for the patterns you can put in the .gitignore file are as follows:
+#   
+#   - Blank lines or lines starting with # are ignored.
+#   - Standard glob patterns work.
+#   - You can end patterns with a forward slash (/) to specify a directory.
+#   - You can negate a pattern by starting it with an exclamation point (!).
+#   
+# Glob patterns are like simplified regular expressions that shells use. An
+# asterisk (*) matches zero or more characters; [abc] matches any character
+# inside the brackets (in this case a, b, or c); a question mark (?) matches
+# a single character; and brackets enclosing characters separated by a hyphen([0-9])
+# matches any character in the range (in this case 0 through 9).
+#   
+#   Here is another example .gitignore file:
+#   
+#   	# a comment - this is ignored
+#   	*.a       # no .a files
+#   	!lib.a    # but do track lib.a, even though you're ignoring .a files above
+#   	/TODO     # only ignore the root TODO file, not subdir/TODO
+#   	build/    # ignore all files in the build/ directory
+#   	doc/*.txt # ignore doc/notes.txt, but not doc/server/arch.txt
+# 
+# ----------------------------------------------------------------------------
+#
+#
+
+# ----------------------------------------------------------------------------
+# Cert's and Key Files
+# ----------------------------------------------------------------------------
+.pem
+
+# ----------------------------------------------------------------------------
+# Compiled source 
+# ----------------------------------------------------------------------------
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ----------------------------------------------------------------------------
+# Packages 
+# ----------------------------------------------------------------------------
+#
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+#
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ----------------------------------------------------------------------------
+# Logs and databases 
+# ----------------------------------------------------------------------------
+*.log
+#*.sql
+*.sqlite
+
+
+# ----------------------------------------------------------------------------
+#  application files
+# ----------------------------------------------------------------------------
+### SCM
+.hg
+.svn
+CVS
+
+### TextMate
+*.tmproj
+*.tmproject
+tmtags
+
+### VIM
+.*.sw[a-z]
+*.un~
+Session.vim
+
+
+# ----------------------------------------------------------------------------
+#  Backup Files
+# ----------------------------------------------------------------------------
+*~
+*.swp
+.*.swp
+*~.nib
+
+*(Autosaved).rtfd/
+Backup[ ]of[ ]*.pages/
+Backup[ ]of[ ]*.key/
+Backup[ ]of[ ]*.numbers/
+
+
+# ----------------------------------------------------------------------------
+#  OS generated files 
+# ----------------------------------------------------------------------------
+### OSX:
+.DS_Store
+.DS_Store*
+
+# Thumbnails
+._*
+Icon?
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+### LINUX:
+.*
+!.gitignore
+*~
+
+# KDE
+#.directory
+
+### Windows:
+# Windows image file caches
+Thumbs.db 
+
+# Folder config file
+Desktop.ini
+
+# Swap files
+
+

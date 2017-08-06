@@ -1,0 +1,62 @@
+# ----------------------------------------------------------------------------
+#  ~/.screenrc
+#  $Id$
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+
+# Disable the startup message
+startup_message off
+
+# disable screen flash bells
+vbell off
+
+# detach on hangup
+autodetach on
+
+# Clear text for 'visual' programs on exit
+altscreen on
+
+# Don't block command output if the terminal stops responding
+# (like if the ssh connection times out for example).
+nonblock on
+
+# 256 color term
+term screen-256color
+
+# use the login shell
+shell $SHELL
+
+# Set a large scrollback buffer
+defscrollback 32000
+
+# Always start `screen` with UTF-8 enabled (`screen -U`)
+defutf8 on
+
+# Change the xterm initialization string from is2=\E[!p\E[?3;4l\E[4l\E>
+# (This fixes the "Aborted because of window size change" konsole symptoms found in bug #134198)
+termcapinfo xterm*|gnome* 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+
+# Hardstatus (update xterm title)
+#
+#hardstatus string ""
+#hardstatus string "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= [$h] %C%a "
+hardstatus string "SCREEN @ %H: %-n - %t"
+#hardstatus alwayslastline
+
+# remap the escape key
+escape ``
+defescape ``
+
+# Bind F7 and F8 to previous and next screen window
+bindkey -k k7 prev
+bindkey -k k8 next
+
+# open a new shell with `n
+bind n screen
+
+# rename screen window with `r
+bind r title
+
+# Caption (use lastline for tabs)
+caption always "%?%F%{-b gk}%:%{-b bb}%?%C | %D | %M %d |%H |%?%F%{-b gk}%? %L=%-Lw%45>%{-b kg}%n%f* %t%{-}%+Lw%-0<"

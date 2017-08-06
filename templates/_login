@@ -1,0 +1,9 @@
+##
+# DELUXE-USR-LOCAL-BIN-INSERT
+# (do not remove this comment)
+##
+echo $PATH | grep -q -s "/usr/local/bin"
+if [ "$status" == 1 ];
+then
+    path-append "usr/local/bin"
+fi

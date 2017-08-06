@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# ----------------------------------------------------------------------------
+#  BASH: Profile
+#  $Id$
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+#
+#  NOTE:
+#  When a interactive shell is started (eg. you open a new terminal session),
+#  the system runs the looks for the PROFILE configuration files and runs them
+#  in the order shown below:
+#
+#    1. /etc/profile
+#    2. /etc/bashrc
+#    3. ~/.bash_profile (NOTE: debian or ubuntu looks for: ~/.profile)
+#    4. ~/.bashrc (NOTE: runs only if it's sourced in ~/.bash_profile)
+#
+#  When an interactive shell, that is NOT a login shell, is started (eg. you
+#  run "bash" command from inside a shell), the system runs ONLY the BASH
+#  configuration files:
+#
+#    1. /etc/bashrc
+#    2. ~/.bashrc
+#
+#  If you run debian linux (or derivats like ubuntu) you have to rename the
+#  profile configuration file from ~/.bash_profile to ~/.profile !!!
+#
+# ----------------------------------------------------------------------------
+
+#: default bashrc and my local inheritance file
+if [ "$BASH" ]; 
+then
+	[ -f ~/.bashrc ] && source ~/.bashrc
+	[ -f ~/.localrc ] && source ~/.localrc
+fi
+

@@ -1,0 +1,48 @@
+" ----------------------------------------------------------------------------
+"  ~/.vimrc
+"  $Id$
+" ----------------------------------------------------------------------------
+" ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+" ----------------------------------------------------------------------------
+
+syntax on
+filetype plugin on 
+
+set ruler
+set number
+set autoindent
+set ts=4
+set shiftwidth=4
+set nocompatible 
+"set expandtab
+"set nobackup
+"set noswapfile
+"set nowritebackup
+"set cm=blowfish
+
+" ----------------------------------------------------------------------------
+"  phpDocumentor for Vim
+" ----------------------------------------------------------------------------
+"source ~/.vim/plugin/php-doc.vim 
+"inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
+"nnoremap <C-P> :call PhpDocSingle()<CR> 
+"vnoremap <C-P> :call PhpDocRange()<CR> 
+
+" ----------------------------------------------------------------------------
+"  Extended ModeLine Plugin (http://www.vim.org/scripts/script.php?script_id=83)
+" ----------------------------------------------------------------------------
+" Loads FirstModeLine() {{{ 
+"  if !exists('*FirstModeLine') 
+"    Runtime plugin/let-modeline.vim 
+"    " :Runtime emulates :runtime 
+"  endif 
+"  if exists('*FirstModeLine') 
+"    aug ALL 
+"      au! 
+"      " To not interfer with Templates loaders like mu-template 
+"      au BufNewFile * :let b:this_is_new_buffer=1 
+"      " Modeline interpretation 
+"      au BufEnter   * :call FirstModeLine() 
+"    aug END 
+"  endif 
+"  " }}} 

@@ -1,0 +1,19 @@
+# ----------------------------------------------------------------------------
+#  BASH: Load Environment
+#  $Id$
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+nbe_msg "Loading environment" ${BASH_SOURCE}
+
+# load all environment vars from ./bash.d/env/
+if [ -d "${NBE_PATH}/bash.d/env" ]; 
+then
+    for file in ${NBE_PATH}/bash.d/env/*; 
+    do
+        if [ -r "$file" ]; 
+        then
+            source $file
+        fi
+    done
+fi

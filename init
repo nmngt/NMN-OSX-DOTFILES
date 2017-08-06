@@ -1,0 +1,419 @@
+#!/usr/bin/env bash
+# ----------------------------------------------------------------------------
+#  BASH: Init NMN_BASH_ENVIRONMENT
+#  $Id$
+# ----------------------------------------------------------------------------
+#  Stuff to enhance my work with the console (darwin only!) :-)
+#
+#  - AirPort (symlink airport alias for easier wifi handling):
+#    sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+#
+#  - TextMate (symlink mate alias to open TextMate from console):
+#    sudo ln -s mate ~/bin/mate_wait
+#    (OR: sudo ln -s /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate)
+#
+#  - NZBVortex (raise maximal memory usage on a very fast connections):
+#    defaults write com.NZBVortex.NZBVortex WriteCacheUpperLimitSize -int 500
+#
+#  - Sublime:
+#    ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+#	 OR:
+#    ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /opt/local/bin/subl
+#
+#  - MAC CLI:
+#    https://github.com/guarinogabriel/Mac-CLI
+#
+#
+#
+#  Usefull MacPorts:
+#
+#  - HTTPie:
+#    https://httpie.org/doc
+#
+#  - BASH v4:
+#    http://www.swe-blog.net/blog/2016/bash4-auf-mac-os-x.html
+#
+#  TODOS:
+#
+#  - bash dircolors funkt nicht
+#
+#
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+#  ::: VERBOSE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+#: Enable/Disable verbose notifications (0=disabled/1=enabled)
+export NBE_VERBOSE=1
+
+# ---------------------------------------------------------------------------
+#  ::: DISPLAY HEADER ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+if [ "${NBE_VERBOSE}" = 1 ];
+then
+	#: Debug Colors
+	white=$(tput bold; tput setaf 7)
+	cyan=$(tput setaf 6)
+	trans=$(tput sgr0)
+
+	#: Debug Banner
+	clear
+	echo "#"
+	echo "#"
+	echo "#                      ███╗   ██╗██████╗ ███████╗                     "
+	echo "#                      ████╗  ██║██╔══██╗██╔════╝                     "
+	echo "#                      ██╔██╗ ██║██████╔╝█████╗                       "
+	echo "#                      ██║╚██╗██║██╔══██╗██╔══╝                       "
+	echo "#                      ██║ ╚████║██████╔╝███████╗                     "
+	echo "#                      ╚═╝  ╚═══╝╚═════╝ ╚══════╝                     "
+	echo "#                                                                     "
+	echo "#                     ::: NMN BASH ENVIRONMENT :::                    "
+	echo "#"
+	echo "#"
+	echo "# Initiating NMN BASH ENVIRONMENT (${cyan}$BASH_SOURCE${trans})"
+fi
+
+# ---------------------------------------------------------------------------
+#  ::: RUNTIME CHECK :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+
+#: This library should not be executed directly.. either source it.
+#[[ "$(basename ${BASH_SOURCE})" == "init" ]] && \
+#	{ echo "ERROR: You can't run this library directly -> Source it!" && exit 3;}
+
+#: Check identify (file basename) of the calling script.
+#[[ -z $ME ]]&& { echo "Failure: \$ME not set or has empty value! Exit." && exit 2;}
+
+#: Check array support in this BASH version
+#testArr[0]='test' || (echo 'Failure: arrays not supported in this bash.' && exit 2)
+
+# ---------------------------------------------------------------------------
+#  ::: SETUP environment :::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+export ENV=$(\
+	uname -s | sed -e 's/  */-/g;y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/')
+
+# init ENV vars
+case "${ENV:=darwin}" in
+	darwin)
+		export IS_MAC=1
+		export IS_OSX=1
+		;;
+	linux*)
+		export IS_LINUX=1
+		;;
+	cygwin*)
+    	export IS_CYGWIN=1
+    	;;
+esac
+
+# ---------------------------------------------------------------------------
+#  ::: BASH SETTINGS :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+#
+# https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
+#
+
+#: set filesystem behaviour
+umask 022			   				# fs settings
+ulimit -S -c 0						# Don't want any coredumps
+#ulimit -c unlimited   				# Let me have core dumps
+
+#: BASH options
+#: http://linuxmemo.free.fr/index.php?title=Options_shell_bash
+#:
+set +x
+set +o noclobber       				# prevents catting over file
+#set -o nounset         			# attempt to use undefined variable outputs error message and forces exit
+#set -o errexit  					# Exit on error
+#set -o ignoreeof      				# can't c-d out of shell
+#set -o notify         				# notify when jobs running in background terminate
+#set -o xtrace         				# useful for debuging
+shopt -s no_empty_cmd_completion  	# bash>=2.04 only
+shopt -s cdspell       				# auto fixes cd / spelling mistakes
+shopt -s cdable_vars   				# set the bash option so that no '$' is required when using the above facility
+shopt -s checkhash	   				# checks that a command found in the hash table exists before trying to execute it.
+shopt -s checkwinsize  				# re-checks window size after window is resized
+shopt -s cmdhist	   				# attempts to save all lines of a multiple-line command in the same history entry
+shopt -s histappend	   				# append history to history file 
+shopt -s histreedit	   				# 
+shopt -s histverify	   				# do not save duplicated cmds in history
+shopt -u mailwarn	   				#
+shopt -s sourcepath	   				# the source builtin uses the value of PATH to find the directory containing the file supplied as an argument.
+shopt -s dotglob	   				# Bash includes filenames beginning with a `.' in the results of filename expansion.
+shopt -s nocaseglob	   				# Bash matches filenames in a case-insensitive fashion when performing filename expansion.
+shopt -s nullglob					# allows filename patterns which match no files to expand to a null string, rather than themselves.
+shopt -s extglob       				# necessary for programmable completion
+shopt -s globstar  					# Must enable globstar, otherwise ** doesn't work.
+                   					# The globstar shell option is new to version 4 of Bash.
+
+# bash completion settings (actually, these are readline settings)
+bind "set completion-ignore-case on" 	# note: bind used instead of sticking these in .inputrc
+bind "set bell-style none" 				# no bell
+bind "set show-all-if-ambiguous on" 	# show list automatically, without double tab
+
+#: terminal 
+stty stop undef
+stty start undef
+
+#: do not show message from other user (with write or wall)
+[ $IS_MAC ] && mesg n || mesg -n
+
+# ---------------------------------------------------------------------------
+#  ::: SETUP OS X ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+#  ATTENTION:
+#  this loads many OS X settings which will alter your operating system GUI
+#  and the behaviour of your OS X installation.
+#
+#  If you dont want this, set NBE_SETUP_OSX_ENVIRONMENT to 0
+# ---------------------------------------------------------------------------
+export NBE_SETUP_OSX_ENVIRONMENT=0
+
+# ---------------------------------------------------------------------------
+#  ::: NMN BASH ENVIRONMENT (NBE) ::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+if [ -z "$NBE_VERSION" ];
+then
+	export NBE_VERSION='0.5.0'					# version
+	export NBE_PATH=$(dirname $BASH_SOURCE) 	# $HOME/.bash_dotfiles
+	export NBE_LOGFILE="${NBE_PATH}/.nmn.log"	# logfile
+
+	#: github repo & origin
+	export NBE_REPOSITORY='nmngt/NMN-OSX-DOTFILES'
+	export NBE_ORIGIN="https://github.com/nmngt/NMN-OSX-DOTFILES.git"
+
+	# propaganda
+	export NBE_PROPAGANDA="Norman Georg-Tusel <norm@ngeorg.com>"
+	export NBE_COPYRIGHT="COPYRIGHT 2004-$(date +"%Y"), ${NBE_PROPAGANDA}. All rights reserved."
+fi
+
+# ---------------------------------------------------------------------------
+#  ::: DECLARATIONS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+
+#: Booleans
+declare -r NO=0
+declare -r YES=1
+declare -r TRUE=0
+declare -r FALSE=1
+
+#: Errors
+declare -r E_ERROR=1
+declare -r E_BADARGS=2
+declare -r E_BADMETHOD=3
+declare -r E_BADFILE=4
+declare -r E_NO_ARGS=65
+declare -r E_NOT_EXECUTABLE=126
+declare -r E_NOT_FOUND=127
+declare -r E_FATAL=999
+
+#: Conditionals
+declare -r IS_BASHVERSION_4=$([ "${BASH_VERSINFO:-0}" -ge 4 ] && echo $YES || echo $NO)
+declare -r IS_BASH4=$IS_BASHVERSION_4
+
+#: Time
+#export NOW=$(date +%Y%m%d%H%M%S)
+#export HOUR=$(date +"%H")
+export YEAR=$(date +"%Y")
+export DATE=$(date +%Y-%m-%d)
+#export TIMESTAMP=$(date +%Y-%m-%d_%H:%M:%S)
+
+#: Symbols
+export NBE_ARROWS=( "⇠" "⇡" "⇢" "⇣" )
+export NBE_SYMBOLS=( "⚑" "»" "♆" "☀" "♞" "☯" "☢" "❄" "+" "▶" )
+
+#: Icons 
+declare -A icon 		# ICONS array
+icon[parent]=" "		# parent
+icon[child]=" ▶"		# child
+icon[block]="█"			# block
+icon[line]="═"			# double line
+icon[happy]="☺"	 		# happy smilie
+icon[mad]="☹"			# mad smilie
+icon[skull]="☠"			# skull
+icon[flower]="✿"		# flower
+icon[star]="✪"			# star
+icon[right]="▶"			# arrow right
+icon[left]="◀"			# arrow left
+icon[arrow]="➔"			# arrow right
+icon[x]="⊗"				# X
+icon[copyright]="©"		# copyright
+icon[sun]="☀"			# sun
+icon[peace]="✌"			# peace
+icon[attention]="☝"		# attention
+
+#: Colors
+declare -r black=$(tput setaf 0)
+declare -r red=$(tput setaf 1)
+declare -r green=$(tput setaf 2)
+declare -r brown=$(tput setaf 3)
+declare -r blue=$(tput setaf 4)
+declare -r purple=$(tput setaf 5)
+declare -r cyan=$(tput setaf 6)
+declare -r grey=$(tput setaf 7)
+declare -r darkgrey=$(tput setaf 0)
+declare -r lightred=$(tput setaf 1)
+declare -r lightgreen=$(tput setaf 2)
+declare -r yellow=$(tput setaf 3)
+declare -r lightblue=$(tput setaf 4)
+declare -r pink=$(tput setaf 5)
+declare -r lightcyan=$(tput setaf 6)
+declare -r white=$(tput setaf 7)
+
+#: Colors Bold
+declare -r darkgreybold=$(tput bold ; tput setaf 0)
+declare -r lightredbold=$(tput bold ; tput setaf 1)
+declare -r lightgreenbold=$(tput bold ; tput setaf 2)
+declare -r yellowbold=$(tput bold ; tput setaf 3)
+declare -r lightbluebold=$(tput bold ; tput setaf 4)
+declare -r pinkbold=$(tput bold ; tput setaf 5)
+declare -r lightcyanbold=$(tput bold ; tput setaf 6)
+declare -r whitebold=$(tput bold ; tput setaf 7)
+
+#: Background-Colors
+declare -r bgblack=$(tput setab 0)
+declare -r bgred=$(tput setab 1)
+declare -r bggreen=$(tput setab 2)
+declare -r bgbrown=$(tput setab 3)
+declare -r bgblue=$(tput setab 4)
+declare -r bgpurple=$(tput setab 5)
+declare -r bgcyan=$(tput setab 6)
+declare -r bggrey=$(tput setab 7)
+
+#: Notification Colors
+declare -r color_error=$(tput setab 1 ; tput bold ; tput setaf 7)
+declare -r color_success=$(tput setab 2 ; tput bold ; tput setaf 7)
+
+#: No Color
+declare -r nc=$(tput sgr0)
+declare -r trans=$(tput sgr0)
+declare -r bold=$(tput bold)
+declare -r underline=$(tput sgr 0 1)
+declare -r dim=$(tput dim)
+declare -r reverse=$(tput rev)
+
+#: Output
+export NO_OUTPUT=' > /dev/null 2>&1'
+export LOG_OUTPUT='2>&1 >> ${NBE_LOGFILE}'
+
+
+
+# -----------------------------------------------------------------------------
+# ::: SOURCE ENVIRONMENT FILES :::::::::::::::::::::::::::::::::::::::::::::::
+# -----------------------------------------------------------------------------
+
+source ${NBE_PATH}/functions
+source ${NBE_PATH}/paths
+# source ${NBE_PATH}/env
+# source ${NBE_PATH}/completions
+# source ${NBE_PATH}/aliases
+# source ${NBE_PATH}/prompt
+
+# ----------------------------------------------------------------------------
+#  ::: ENVIRONMENT VARS :::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+# load all environment vars from ./bash.d/env/
+if [ -d "${NBE_PATH}/bash.d/env" ]; 
+then
+	nbe_msg "Loading environment vars" ${BASH_SOURCE}
+    for file in ${NBE_PATH}/bash.d/env/*; 
+    do
+        if [ -r "$file" ]; 
+        then
+            source $file
+        fi
+    done
+fi
+
+# ----------------------------------------------------------------------------
+#  ::: SYSTEM COMPLETIONS :::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; 
+then
+	nbe_msg "Loading BASH system completions" ${BASH_SOURCE}
+	source /etc/bash_completion
+fi
+
+# ----------------------------------------------------------------------------
+#  ::: CUSTOM COMPLETIONS :::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+# load all environment vars from ./bash.d/completions/
+if [ -d "${NBE_PATH}/bash.d/completions" ]; 
+then
+	nbe_msg "Loading BASH custom completions" ${BASH_SOURCE}
+    for file in ${NBE_PATH}/bash.d/completions/*; 
+    do
+        if [ -r "$file" ]; # && [ "${file#1}"]; 
+        then
+        	#
+        	# HACK: do not load completions with underline in filename
+        	#		like "_ssh.bash"
+        	#
+            f=$(basename $file)
+            if [[ "${f:0:1}" == "_" ]]; then
+				continue
+			fi
+
+            source $file
+        fi
+    done
+fi
+
+# ----------------------------------------------------------------------------
+#  ::: BASH ALIASES :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+# load all aliases from ./bash.d/aliases/
+if [ -d "${NBE_PATH}/bash.d/aliases" ]; 
+then
+	nbe_msg "Setup BASH aliases" ${BASH_SOURCE}
+    for file in ${NBE_PATH}/bash.d/aliases/*; 
+    do
+        if [ -r "$file" ]; 
+        then
+            source $file
+        fi
+    done
+fi
+
+# ---------------------------------------------------------------------------
+#  ::: DISPLAY FOOTER ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+
+# nbe_msg
+# nbe_msg "Successfully loaded NMN BASH ENVIRONMENT configuration." ${BASH_SOURCE}
+# # nbe_hr
+# echo "#"
+# nbe_hr
+# echo "${white}# ::::: NMN BASH ENVIRONMENT (v.${NBE_VERSION}) up & running :::: <norm@ngeorg.com>${trans}"
+# nbe_hr
+
+#echo -e "\n\n${white}# ----------------------------------------------------------------------${trans}"
+#echo "${white} ::::: NMN BASH ENVIRONMENT :::: <norm@ngeorg.com> :::: ${NMN_BASH_ENVIRONMENT_VERSION} :::::${trans}"
+#echo -e "${white}----------------------------------------------------------------------${trans}"
+
+
+
+
+
+
+
+
+#[[ "${NBE_VERBOSE}" = 1 ]] && echo -e "${white} That's all! Your UserProfile is ${red}UP${trans} ${white}and ${red}RUNNING${white} :-)${trans}\n"
+#dbgmsg \
+	# "${white}That's all! Your UserProfile is ${red}UP${trans} ${white}and ${red}RUNNING${white} :-)${trans}\n" \
+	# "${BASH_SOURCE}"
+
+# Hello Message ----------------------------------------------------
+#echo -e "Kernal Information: " `uname -smr`
+#echo -e "`bash --version`"
+#echo -ne "Uptime: "; uptime
+#echo -ne "Server time is: "; date
+
+#echo "# ----------------------------------------------------------------------------"
+#echo "# ----------------------------------------------------------------------------"
+#echo "#  END of ~/.bash_profile"
+#echo "# ----------------------------------------------------------------------------"
+#echo "# ----------------------------------------------------------------------------"

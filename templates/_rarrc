@@ -1,0 +1,6 @@
+#
+# RAR Configuration File
+#
+#switches=-m5 -s
+#switches=-m4 -or -t -tk -ag+YYYYMMDD-NN -ilog~/.rar.log
+

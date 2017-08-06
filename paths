@@ -1,0 +1,82 @@
+# ----------------------------------------------------------------------------
+#  BASH: PATH Settings
+#  $Id$
+# ----------------------------------------------------------------------------
+# ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
+# ----------------------------------------------------------------------------
+nbe_msg "Set paths" ${BASH_SOURCE}
+
+# tmp
+export TMP=/tmp
+
+# cdpath
+#export CDPATH=/srv
+
+# man
+#export MANPATH=/usr/local/man:/usr/local/mysql/man:$MANPATH
+
+# node
+export NODE_PATH="/usr/local/lib/node"
+
+# go builder
+export GOPATH="${HOME}/go"
+
+
+# ----------------------------------------------------------------------------
+#  ::: MY BINARIES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+if [ -d "~/bin" ]; 
+then
+    export SCRIPTS="~/bin"
+	export SCRIPTSDIR=${SCRIPTS}
+	export SCRIPTSPATH=${SCRIPTS}
+	#export PATH=${PATH}:${SCRIPTS}
+fi
+
+# ----------------------------------------------------------------------------
+#  ::: PATH :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+export PATH="/usr/sbin:/usr/bin:/sbin:/bin"
+
+# system
+path-prepend "/usr/local/sbin:/usr/local/bin"
+path-prepend "/opt/local/sbin:/opt/local/bin"
+path-append "/usr/games"
+
+# macports
+if [ -d "$HOME/.composer" ]; 
+then
+	path-prepend "$HOME/.composer/vendor/bin"
+fi
+
+# go
+if [ -d "/usr/local/go/bin/" ]; 
+then
+	path-prepend "/usr/local/go/bin/"
+fi
+
+# mamp pro
+if [ -d "/Applications/MAMP/Library/bin" ]; 
+then
+	path-prepend "/Applications/MAMP/Library/bin"
+fi
+
+# ...and at least and AT LAST! 
+path-prepend "${NBE_PATH}/bin"
+path-prepend "${SCRIPTS}"
+
+
+# /usr/games:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:
+# /Users/norman/.composer/vendor/bin:/usr/local/go/bin/:/Applications/MAMP/Library/bin:
+
+# ---------------------------------------------------------------------------
+#  ::: CLEANUP PATHS :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ---------------------------------------------------------------------------
+
+# Remove duplicate entries from PATH and retain the original order
+#if type nl &> /dev/null; then
+#  export PATH=$(echo "${PATH}" | tr : '\n' | nl | sort -u -k 2,2 | sort -n | cut -f 2- | tr '\n' : | sed -e 's/:$//' -e 's/^://')
+#fi
+
+
+
