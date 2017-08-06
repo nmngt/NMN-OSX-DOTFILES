@@ -112,7 +112,7 @@ esac
 # ---------------------------------------------------------------------------
 #  ::: BASH SETTINGS :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # ---------------------------------------------------------------------------
-#
+# http://tldp.org/LDP/abs/html/internalvariables.html#BASHPIDREF
 # https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
 #
 
@@ -159,7 +159,7 @@ stty stop undef
 stty start undef
 
 #: do not show message from other user (with write or wall)
-[ $IS_MAC ] && mesg n || mesg -n
+#[ $IS_MAC ] && mesg n || mesg -n
 
 # ---------------------------------------------------------------------------
 #  ::: SETUP OS X ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -389,10 +389,9 @@ fi
 # nbe_hr
 # echo "${white}# ::::: NMN BASH ENVIRONMENT (v.${NBE_VERSION}) up & running :::: <norm@ngeorg.com>${trans}"
 # nbe_hr
-
-#echo -e "\n\n${white}# ----------------------------------------------------------------------${trans}"
-#echo "${white} ::::: NMN BASH ENVIRONMENT :::: <norm@ngeorg.com> :::: ${NMN_BASH_ENVIRONMENT_VERSION} :::::${trans}"
-#echo -e "${white}----------------------------------------------------------------------${trans}"
+echo -e "\n\n${white}----------------------------------------------------------------------${trans}"
+echo "${white} ::::: NMN BASH ENVIRONMENT :::: <norm@ngeorg.com> :::: ${NBE_VERSION} :::::${trans}"
+echo -e "${white}----------------------------------------------------------------------${trans}"
 
 
 
