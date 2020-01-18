@@ -177,13 +177,13 @@ export NBE_SETUP_OSX_ENVIRONMENT=0
 # ---------------------------------------------------------------------------
 if [ -z "$NBE_VERSION" ];
 then
-	export NBE_VERSION='0.5.0'					# version
+	export NBE_VERSION='0.6.0'					# version
 	export NBE_PATH=$(dirname $BASH_SOURCE) 	# $HOME/.bash_dotfiles
-	export NBE_LOGFILE="${NBE_PATH}/.nmn.log"	# logfile
+	export NBE_LOGFILE="${NBE_PATH}/.nbe.log"	# logfile
 
 	#: github repo & origin
-	export NBE_REPOSITORY='nmngt/NMN-OSX-DOTFILES'
-	export NBE_ORIGIN="https://github.com/nmngt/NMN-OSX-DOTFILES.git"
+	export NBE_REPOSITORY='nmngt/ngt-dotfiles'
+	export NBE_ORIGIN="https://github.com/nmngt/ngt-dotfiles.git"
 
 	# propaganda
 	export NBE_PROPAGANDA="Norman Georg-Tusel <norm@ngeorg.com>"

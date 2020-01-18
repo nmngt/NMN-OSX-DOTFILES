@@ -16,10 +16,10 @@ export TMP=/tmp
 #export MANPATH=/usr/local/man:/usr/local/mysql/man:$MANPATH
 
 # node
-export NODE_PATH="/usr/local/lib/node"
+#export NODE_PATH="/usr/local/lib/node"
 
 # go builder
-export GOPATH="${HOME}/go"
+#export GOPATH="${HOME}/go"
 
 
 # ----------------------------------------------------------------------------
@@ -64,10 +64,6 @@ fi
 # ...and at least and AT LAST! 
 path-prepend "${NBE_PATH}/bin"
 path-prepend "${SCRIPTS}"
-
-
-# /usr/games:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:
-# /Users/norman/.composer/vendor/bin:/usr/local/go/bin/:/Applications/MAMP/Library/bin:
 
 # ---------------------------------------------------------------------------
 #  ::: CLEANUP PATHS :::::::::::::::::::::::::::::::::::::::::::::::::::::::

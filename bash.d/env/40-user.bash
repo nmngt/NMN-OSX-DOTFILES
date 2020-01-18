@@ -25,11 +25,6 @@ case ${USER} in
 		export COMPANY="NGT"
 		export COMPANY_URL="https://georg-tusel.com"
 		;;
-	#akem*|achim*)
-	#	export EMAIL="a.draeger@internet-marketing-agentur.com"
-	#	export COMPANY="Internet-Marketing-Agentur"
-	#	export COMPANY_URL="http://www.internet-marketing-agentur.com"
-	#	;;
 	root)
 		export EMAIL="root@${FQDN}"
 		export COMPANY_URL="http://${FQDN}"

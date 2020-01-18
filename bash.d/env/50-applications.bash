@@ -16,7 +16,8 @@ export PREVIEW="less"
 
 if [ $IS_MAC ];
 then
-	[[ -x "/usr/local/bin/subl" ]] && EDITOR="subl"
+    [[ -x "/usr/local/bin/subl" ]] && EDITOR="subl"
+	[[ -x "~/bin/subl" ]] && EDITOR="subl"
 	PREVIEW="/Applications/Preview.app"
 fi
 

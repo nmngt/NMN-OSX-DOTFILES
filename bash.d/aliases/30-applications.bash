@@ -56,27 +56,27 @@ then
 	# ---------------------------------------------------------------------------
 	#  ::: PHP Composer ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	# ---------------------------------------------------------------------------
-	if [ -x "/opt/local/bin/composer.phar" ]; 
-	then
-		nbe_msg "${icon[child]} - Composer" ${BASH_SOURCE}
-		alias composer="php /opt/local/bin/composer.phar"
-	fi
+	# if [ -x "/opt/local/bin/composer.phar" ]; 
+	# then
+	# 	nbe_msg "${icon[child]} - Composer" ${BASH_SOURCE}
+	# 	alias composer="php /opt/local/bin/composer.phar"
+	# fi
 
 	# ---------------------------------------------------------------------------
 	#  ::: MAMP (PRO) ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	# ---------------------------------------------------------------------------
-	if [ -d "/Applications/MAMP" ]; 
-	then
-		nbe_msg "${icon[child]} - MAMP" ${BASH_SOURCE}
-		#: MAMP Aliases
-		alias php='/Applications/MAMP/bin/php/php7.0.20/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.0.20.ini"'
-		alias pear='/Applications/MAMP/bin/php/php7.0.20/bin/pear'
-		alias pecl='/Applications/MAMP/bin/php/php7.0.20/bin/pecl'
-		alias mysql='/Applications/MAMP/Library/bin/mysql --host=localhost'
+	# if [ -d "/Applications/MAMP" ]; 
+	# then
+	# 	nbe_msg "${icon[child]} - MAMP" ${BASH_SOURCE}
+	# 	#: MAMP Aliases
+	# 	alias php='/Applications/MAMP/bin/php/php7.0.20/bin/php -c "/Library/Application Support/appsolute/MAMP PRO/conf/php7.0.20.ini"'
+	# 	alias pear='/Applications/MAMP/bin/php/php7.0.20/bin/pear'
+	# 	alias pecl='/Applications/MAMP/bin/php/php7.0.20/bin/pecl'
+	# 	alias mysql='/Applications/MAMP/Library/bin/mysql --host=localhost'
 
-		#: mamp-cli
-		# https://www.npmjs.com/package/mamp-cli
-	fi
+	# 	#: mamp-cli
+	# 	# https://www.npmjs.com/package/mamp-cli
+	# fi
 
 	# ---------------------------------------------------------------------------
 	#  ::: PHP :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

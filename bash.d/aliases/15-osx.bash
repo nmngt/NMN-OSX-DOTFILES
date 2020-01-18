@@ -21,7 +21,7 @@ then
     alias unmute="osascript -e 'set volume output muted false'"
 
     # Get OS X Software Updates, and update installed Ruby gems, Homebrew, and their installed packages
-    alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; sudo gem update --system; sudo gem update'
+    #alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; sudo gem update --system; sudo gem update'
 
     # Empty the Trash on all mounted volumes and the main HDD
     # Also, clear Apple’s System Logs to improve shell startup speed
