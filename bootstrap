@@ -381,38 +381,13 @@ fi
 # ---------------------------------------------------------------------------
 #  ::: DISPLAY FOOTER ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # ---------------------------------------------------------------------------
-
-# nbe_msg
-# nbe_msg "Successfully loaded NMN BASH ENVIRONMENT configuration." ${BASH_SOURCE}
-# # nbe_hr
-# echo "#"
-# nbe_hr
-# echo "${white}# ::::: NMN BASH ENVIRONMENT (v.${NBE_VERSION}) up & running :::: <norm@ngeorg.com>${trans}"
-# nbe_hr
 echo -e "\n\n${white}----------------------------------------------------------------------${trans}"
 echo "${white} ::::: NMN BASH ENVIRONMENT :::: <norm@ngeorg.com> :::: ${NBE_VERSION} :::::${trans}"
 echo -e "${white}----------------------------------------------------------------------${trans}"
 
-
-
-
-
-
-
-
-#[[ "${NBE_VERBOSE}" = 1 ]] && echo -e "${white} That's all! Your UserProfile is ${red}UP${trans} ${white}and ${red}RUNNING${white} :-)${trans}\n"
-#dbgmsg \
-	# "${white}That's all! Your UserProfile is ${red}UP${trans} ${white}and ${red}RUNNING${white} :-)${trans}\n" \
-	# "${BASH_SOURCE}"
 
 # Hello Message ----------------------------------------------------
 #echo -e "Kernal Information: " `uname -smr`
 #echo -e "`bash --version`"
 #echo -ne "Uptime: "; uptime
 #echo -ne "Server time is: "; date
-
-#echo "# ----------------------------------------------------------------------------"
-#echo "# ----------------------------------------------------------------------------"
-#echo "#  END of ~/.bash_profile"
-#echo "# ----------------------------------------------------------------------------"
-#echo "# ----------------------------------------------------------------------------"
