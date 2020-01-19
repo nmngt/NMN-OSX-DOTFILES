@@ -63,9 +63,11 @@ export HOSTNAME=$(hostname -s)
 #
 if [ $IS_MAC ]; 
 then
-	export BATTERY_INFO=$(ioreg -rc AppleSmartBattery)
-	export BATTERY_CURRENT_CHARGE=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
-	export BATTERY_TOTAL_CHARGE=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
+	#export BATTERY_INFO=$(ioreg -rc AppleSmartBattery)
+	#export BATTERY_CURRENT_CHARGE=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
+	#export BATTERY_TOTAL_CHARGE=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
+	export BATTERY_PERCENT = $(pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d';')
+	export BATTERY_TIME = $(pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f3 -d';')
 fi
 
 # 

@@ -2,6 +2,10 @@
 # ----------------------------------------------------------------------------
 #  Environment Settings: OS X
 #  $Id$
+# 
+#  read: 
+#  - https://github.com/herrbischoff/awesome-macos-command-line
+#  - https://github.com/webpro/awesome-dotfiles
 # ----------------------------------------------------------------------------
 # ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
 # ----------------------------------------------------------------------------

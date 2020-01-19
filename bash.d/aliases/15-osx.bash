@@ -8,6 +8,18 @@ nbe_msg "${icon[child]} OS X" ${BASH_SOURCE}
 
 if [ $IS_MAC ]; 
 then
+    # sleep
+    alias gn8="sudo pmset sleep 20"
+
+    # Generate secure password
+    alias generatepassword="LC_ALL=C tr -dc "[:alnum:]" < /dev/urandom | head -c 20 | pbcopy"
+
+    # start screensaver
+    alias startscreensaver="/System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
+
+    # suspend session
+    alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
     # Show/hide hidden files in Finder
 	alias showdotfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 	alias hidedotfiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
