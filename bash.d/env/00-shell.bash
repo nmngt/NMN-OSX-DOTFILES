@@ -33,7 +33,7 @@ export HISTCONTROL="${HISTCONTROL}${HISTCONTROL+,}ignoredups"
 HISTIGNORE_BASE=$'[ \t]*:&:[fb]g:exit:ls:ls -?::ls -??:ll:history:cd:cd -:cd ~:cd ..:..:pwd:date:* --help:* help'
 
 # Ignore basic git commands
-HISTIGNORE_GIT='git +([a-z]):git co -:git add -?:git pob -f:git pr -o:git undo .:git diff --staged'
+HISTIGNORE_GIT='git +([a-z]):git pob -f:git pr -o:git undo .:git diff --staged'
 
 # Ignore common local commands
 HISTIGNORE_LOCAL='o:oo'

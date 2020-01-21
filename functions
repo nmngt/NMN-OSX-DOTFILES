@@ -4,7 +4,7 @@
 # ----------------------------------------------------------------------------
 # ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
 # ----------------------------------------------------------------------------
-[[ "${NBE_VERBOSE}" = 1 ]] && echo -e "# Loading core functions (${cyan}$BASH_SOURCE${trans})"
+[[ "${NBE_VERBOSE}" = 1 ]] && echo -e "Loading core functions (${cyan}$BASH_SOURCE${trans})"
 
 
 # ----------------------------------------------------------------------------
@@ -41,10 +41,6 @@ function nbe_error()
 {
     echo "${color_error}[${2:=Undefined}]${trans} ${1}" >&2
     echo "$(date "+%Y%m%d %H:%M:%S") [${2:=Undefined}]: ${1}" >> $NBE_LOGFILE
-#     date > /dev/stderr
-#     hostname > /dev/stderr
-#     echo "$@" > /dev/stderr
-#     logger "$@"
 }
 
 #
@@ -75,8 +71,6 @@ function nbe_usage()
     [ "$3" == "" ] && exit $E_BADARGS || exit $3
 }
 
-
-
 #
 # nbe_msg() - print debug msg to stdout
 #
@@ -90,7 +84,7 @@ function nbe_msg()
 {
     [ $# -eq 0 ] && nbe_usage ${FUNCNAME} "'arguments' '[\$BASH_SOURCE]'" ${E_NO_ARGS}
 
-    [ "${NBE_VERBOSE}" = 1 ] && echo -e "# ${1} (${cyan}${2:="unknown"}${trans})"
+    [ "${NBE_VERBOSE}" = 1 ] && echo -e "${1} (${cyan}${2:="unknown"}${trans})"
 }
 
 #
@@ -101,21 +95,25 @@ function nbe_hr()
     echo "${white}----------------------------------------------------------------------${trans}"
 }
 
+#
+# source_from_dir() - source all files in directory $1
+#
+function source_from_dir()
+{
+    [ $# -eq 0 ] && nbe_usage ${FUNCNAME} "'arguments' '[\$BASH_SOURCE]'" ${E_NO_ARGS}
+
+    if [ -d ${1} ]; 
+    then
+        nbe_msg "Loading files from ${1}" ${BASH_SOURCE}
+        for file in ${1}/*; 
+        do
+            [ -r "$file" ] && [ -f "$file" ] && source $file
+        done
+    fi
+}
 
 # ----------------------------------------------------------------------------
 #  ::: LOAD FUNCTIONS :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # ----------------------------------------------------------------------------
-
-
-
 nbe_msg "Loading custom functions" ${BASH_SOURCE}
-if [ -d "${NBE_PATH}/bash.d/functions" ]; 
-then
-    for file in ${NBE_PATH}/bash.d/functions/*; 
-    do
-        if [ -r "$file" ]; 
-        then
-            source $file
-        fi
-    done
-fi
+source_from_dir "${NBE_PATH}/bash.d/functions"

@@ -21,23 +21,14 @@ export TMP=/tmp
 # go builder
 #export GOPATH="${HOME}/go"
 
-
-# ----------------------------------------------------------------------------
-#  ::: MY BINARIES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# ----------------------------------------------------------------------------
-if [ -d "~/bin" ]; 
-then
-    export SCRIPTS="~/bin"
-	export SCRIPTSDIR=${SCRIPTS}
-	export SCRIPTSPATH=${SCRIPTS}
-	#export PATH=${PATH}:${SCRIPTS}
-fi
-
 # ----------------------------------------------------------------------------
 #  ::: PATH :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # ----------------------------------------------------------------------------
 export PATH="/usr/sbin:/usr/bin:/sbin:/bin"
 
+# ----------------------------------------------------------------------------
+#  ::: CUSTOM :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
 # system
 path-prepend "/usr/local/sbin:/usr/local/bin"
 path-prepend "/opt/local/sbin:/opt/local/bin"
@@ -61,9 +52,28 @@ then
 	path-prepend "/Applications/MAMP/Library/bin"
 fi
 
-# ...and at least and AT LAST! 
-path-prepend "${NBE_PATH}/bin"
-path-prepend "${SCRIPTS}"
+# ----------------------------------------------------------------------------
+#  ::: MY BINARIES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# ----------------------------------------------------------------------------
+# if [ -d "~/bin" ]; 
+# then
+#     path-prepend "~/bin"
+# fi
+
+if [ -d "~/scripts" ]; 
+then
+    export SCRIPTS="~/scripts"
+    export SCRIPTSDIR=${SCRIPTS}
+    export SCRIPTSPATH=${SCRIPTS}
+
+    path-prepend "~/scripts"
+fi
+
+# ...NBE bin tooo.. 
+# path-prepend "${NBE_PATH}/bin"
+# path-prepend "${SCRIPTS}"
+path-prepend "~/bin"
+
 
 # ---------------------------------------------------------------------------
 #  ::: CLEANUP PATHS :::::::::::::::::::::::::::::::::::::::::::::::::::::::

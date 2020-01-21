@@ -4,7 +4,7 @@
 # ----------------------------------------------------------------------------
 # ::::::::::::::::::::::::::::::: vim: set noai noet ru nu ml ts=4 sw=4 tw=0:
 # ----------------------------------------------------------------------------
-nbe_msg "${icon[child]} System" ${BASH_SOURCE}
+nbe_msg "${icon[skull]} System" ${BASH_SOURCE}
 
 #
 # os
@@ -61,14 +61,14 @@ export HOSTNAME=$(hostname -s)
 #
 # battery
 #
-if [ $IS_MAC ]; 
-then
-	#export BATTERY_INFO=$(ioreg -rc AppleSmartBattery)
-	#export BATTERY_CURRENT_CHARGE=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
-	#export BATTERY_TOTAL_CHARGE=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
-	export BATTERY_PERCENT = $(pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d';')
-	export BATTERY_TIME = $(pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f3 -d';')
-fi
+# if [ $IS_MAC ]; 
+# then
+# 	#export BATTERY_INFO=$(ioreg -rc AppleSmartBattery)
+# 	#export BATTERY_CURRENT_CHARGE=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
+# 	#export BATTERY_TOTAL_CHARGE=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
+# 	#export BATTERY_PERCENT = $(pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d';')
+# 	#export BATTERY_TIME = $(pmset -g batt | egrep "([0-9]+\%).*" -o --colour=auto | cut -f3 -d';')
+# fi
 
 # 
 # Trim new lines and copy to clipboard

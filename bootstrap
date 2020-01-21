@@ -60,19 +60,20 @@ then
 
 	#: Debug Banner
 	clear
+	echo "# -------------------------------"
 	echo "#"
+	echo "#  ███╗   ██╗██████╗ ███████╗"
+	echo "#  ████╗  ██║██╔══██╗██╔════╝"
+	echo "#  ██╔██╗ ██║██████╔╝█████╗"
+	echo "#  ██║╚██╗██║██╔══██╗██╔══╝"
+	echo "#  ██║ ╚████║██████╔╝███████╗"
+	echo "#  ╚═╝  ╚═══╝╚═════╝ ╚══════╝"
 	echo "#"
-	echo "#                      ███╗   ██╗██████╗ ███████╗                     "
-	echo "#                      ████╗  ██║██╔══██╗██╔════╝                     "
-	echo "#                      ██╔██╗ ██║██████╔╝█████╗                       "
-	echo "#                      ██║╚██╗██║██╔══██╗██╔══╝                       "
-	echo "#                      ██║ ╚████║██████╔╝███████╗                     "
-	echo "#                      ╚═╝  ╚═══╝╚═════╝ ╚══════╝                     "
-	echo "#                                                                     "
-	echo "#                     ::: NMN BASH ENVIRONMENT :::                    "
-	echo "#"
-	echo "#"
-	echo "# Initiating NMN BASH ENVIRONMENT (${cyan}$BASH_SOURCE${trans})"
+	echo "# ::: NMN BASH ENVIRONMENT :::"
+    echo "#"
+	echo "# -------------------------------"
+    echo ""
+	echo "Initiating NMN BASH ENVIRONMENT (${cyan}$BASH_SOURCE${trans})"
 fi
 
 # ---------------------------------------------------------------------------
@@ -187,7 +188,7 @@ then
 
 	# propaganda
 	export NBE_PROPAGANDA="Norman Georg-Tusel <norm@ngeorg.com>"
-	export NBE_COPYRIGHT="COPYRIGHT 2004-$(date +"%Y"), ${NBE_PROPAGANDA}. All rights reserved."
+	export NBE_COPYRIGHT="running since 2004-$(date +"%Y"), ${NBE_PROPAGANDA}."
 fi
 
 # ---------------------------------------------------------------------------
@@ -215,11 +216,8 @@ declare -r IS_BASHVERSION_4=$([ "${BASH_VERSINFO:-0}" -ge 4 ] && echo $YES || ec
 declare -r IS_BASH4=$IS_BASHVERSION_4
 
 #: Time
-#export NOW=$(date +%Y%m%d%H%M%S)
-#export HOUR=$(date +"%H")
 export YEAR=$(date +"%Y")
 export DATE=$(date +%Y-%m-%d)
-#export TIMESTAMP=$(date +%Y-%m-%d_%H:%M:%S)
 
 #: Symbols
 export NBE_ARROWS=( "⇠" "⇡" "⇢" "⇣" )
@@ -299,34 +297,17 @@ declare -r reverse=$(tput rev)
 export NO_OUTPUT=' > /dev/null 2>&1'
 export LOG_OUTPUT='2>&1 >> ${NBE_LOGFILE}'
 
-
-
 # -----------------------------------------------------------------------------
 # ::: SOURCE ENVIRONMENT FILES :::::::::::::::::::::::::::::::::::::::::::::::
 # -----------------------------------------------------------------------------
-
 source ${NBE_PATH}/functions
 source ${NBE_PATH}/paths
-# source ${NBE_PATH}/env
-# source ${NBE_PATH}/completions
-# source ${NBE_PATH}/aliases
-# source ${NBE_PATH}/prompt
 
 # ----------------------------------------------------------------------------
 #  ::: ENVIRONMENT VARS :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # ----------------------------------------------------------------------------
 # load all environment vars from ./bash.d/env/
-if [ -d "${NBE_PATH}/bash.d/env" ]; 
-then
-	nbe_msg "Loading environment vars" ${BASH_SOURCE}
-    for file in ${NBE_PATH}/bash.d/env/*; 
-    do
-        if [ -r "$file" ]; 
-        then
-            source $file
-        fi
-    done
-fi
+source_from_dir "${NBE_PATH}/bash.d/env"
 
 # ----------------------------------------------------------------------------
 #  ::: SYSTEM COMPLETIONS :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -340,43 +321,14 @@ fi
 # ----------------------------------------------------------------------------
 #  ::: CUSTOM COMPLETIONS :::::::::::::::::::::::::::::::::::::::::::::::::::
 # ----------------------------------------------------------------------------
-# load all environment vars from ./bash.d/completions/
-if [ -d "${NBE_PATH}/bash.d/completions" ]; 
-then
-	nbe_msg "Loading BASH custom completions" ${BASH_SOURCE}
-    for file in ${NBE_PATH}/bash.d/completions/*; 
-    do
-        if [ -r "$file" ]; # && [ "${file#1}"]; 
-        then
-        	#
-        	# HACK: do not load completions with underline in filename
-        	#		like "_ssh.bash"
-        	#
-            f=$(basename $file)
-            if [[ "${f:0:1}" == "_" ]]; then
-				continue
-			fi
-
-            source $file
-        fi
-    done
-fi
+# load all bash completions from ./bash.d/completions/
+source_from_dir "${NBE_PATH}/bash.d/completions"
 
 # ----------------------------------------------------------------------------
 #  ::: BASH ALIASES :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # ----------------------------------------------------------------------------
 # load all aliases from ./bash.d/aliases/
-if [ -d "${NBE_PATH}/bash.d/aliases" ]; 
-then
-	nbe_msg "Setup BASH aliases" ${BASH_SOURCE}
-    for file in ${NBE_PATH}/bash.d/aliases/*; 
-    do
-        if [ -r "$file" ]; 
-        then
-            source $file
-        fi
-    done
-fi
+source_from_dir "${NBE_PATH}/bash.d/aliases"
 
 # ---------------------------------------------------------------------------
 #  ::: DISPLAY FOOTER ::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -385,9 +337,3 @@ echo -e "\n\n${white}-----------------------------------------------------------
 echo "${white} ::::: NMN BASH ENVIRONMENT :::: <norm@ngeorg.com> :::: ${NBE_VERSION} :::::${trans}"
 echo -e "${white}----------------------------------------------------------------------${trans}"
 
-
-# Hello Message ----------------------------------------------------
-#echo -e "Kernal Information: " `uname -smr`
-#echo -e "`bash --version`"
-#echo -ne "Uptime: "; uptime
-#echo -ne "Server time is: "; date
